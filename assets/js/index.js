@@ -1,7 +1,6 @@
 /***NOTA: Se deja el arreglo de propiedades en el archivo "array.js", con la finalidad de solo dejar la lógica en este archivo */
 const html = document.querySelector('.propiedades') //Establece donde se agregará el contenido en el html
 const buttonSeach = document.querySelector('.seach') //Este es el botón que ejecutara la búsqueda
-const buttonClean = document.querySelector('.clean') //Este es el botón que limpia los parámetros de búsqueda y carga contenido por defecto
 const rooms = document.querySelector('.rooms') //Este es el input donde se ingresa el número de habitaciones
 const metersMin = document.querySelector('.meters_min') //Este es el input del mínimo de metros cuadrados que se desea buscar
 const metersMax = document.querySelector('.meters_max') //Este es el input máximo de metros cuadrados que se desea buscar
