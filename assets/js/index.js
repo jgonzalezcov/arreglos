@@ -32,24 +32,26 @@ const setview = function (click, rommsSeach, MeterMinSeach, MeterMaxSeach) {
     alert('Debes ingresar todos los parámetros de búsqueda')
     return
     /*************Resetea los parámetros necesario para desplegar la información de la nueva búsqueda*************/
-  } else template = ''
-  html.innerHTML = ''
-  numReg = 0
-  /*************comienza el bucle con un if para filtra la información que se mostrara en el HTML****************/
-  for (let prop of propiedadesJSON) {
-    if (
-      prop.rooms >= rommsSeach &&
-      prop.meters >= MeterMinSeach &&
-      prop.meters <= MeterMaxSeach
-    ) {
-      /*************Se comienza a recopilar la información en las variables por cada ciclo del bucle************/
-      numReg = numReg + 1
-      dataLoad(prop.src, prop.name, prop.rooms, prop.meters, prop.description)
+  } else {
+    template = ''
+    html.innerHTML = ''
+    numReg = 0
+    /*************comienza el bucle con un if para filtra la información que se mostrara en el HTML****************/
+    for (let prop of propiedadesJSON) {
+      if (
+        prop.rooms >= rommsSeach &&
+        prop.meters >= MeterMinSeach &&
+        prop.meters <= MeterMaxSeach
+      ) {
+        /*************Se comienza a recopilar la información en las variables por cada ciclo del bucle************/
+        numReg = numReg + 1
+        dataLoad(prop.src, prop.name, prop.rooms, prop.meters, prop.description)
+      }
     }
+    /****************Se Pasa la información recopilada en el bucle (fuera de este) al HTML******************/
+    html.innerHTML = template
+    total.innerHTML = `Total: ${numReg}`
   }
-  /****************Se Pasa la información recopilada en el bucle (fuera de este) al HTML******************/
-  html.innerHTML = template
-  total.innerHTML = `Total: ${numReg}`
 }
 /*************Se llama a la función setview para realizar la búsqueda desde el botón********************/
 buttonSeach.addEventListener('click', () => {
