@@ -1,6 +1,6 @@
 /***NOTA: Se deja el arreglo de propiedades en el archivo "array.js", con la finalidad de solo dejar la lógica en este archivo */
 const html = document.querySelector('.propiedades') //Establece donde se agregará el contenido en el html
-const buttonSeach = document.querySelector('.seach') //Este es el botón que ejecutara la búsqueda
+const buttonSearch = document.querySelector('.search') //Este es el botón que ejecutara la búsqueda
 const rooms = document.querySelector('.rooms') //Este es el input donde se ingresa el mínimo de número de habitaciones
 const metersMin = document.querySelector('.meters_min') //Este es el input del mínimo de metros cuadrados que se desea buscar
 const metersMax = document.querySelector('.meters_max') //Este es el input máximo de metros cuadrados que se desea buscar
@@ -23,27 +23,31 @@ const dataLoad = function (src, name, rooms, meters, description) {
   </section>
   </div>`
 }
-const setview = function (click, rommsSeach, MeterMinSeach, MeterMaxSeach) {
+const setview = function (click, rommsSearch, MeterMinSearch, MeterMaxSearch) {
   /***********************Valida que los datos ingresados no estén vacíos***************************************/
   if (
-    click === 'Seach' &&
+    click === 'Search' &&
     (rooms.value === '' || metersMin.value === '' || metersMax.value === '')
   ) {
     alert('Debes ingresar todos los parámetros de búsqueda')
     return
-    /*************Resetea los parámetros necesario para desplegar la información de la nueva búsqueda*************/
+    /***********************Valida que el mínimo de metros no sea mayor que el maximo de metros ingresados*******/
+  } else if (metersMin.value > metersMax.value) {
+    alert('El mínimo de metros no puede ser mayor a máximo de metros')
+    return
   } else {
+    /*************Resetea los parámetros necesario para desplegar la información de la nueva búsqueda*************/
     template = ''
     html.innerHTML = ''
     numReg = 0
     /*************comienza el bucle con un if para filtra la información que se mostrara en el HTML****************/
     for (let prop of propiedadesJSON) {
-      if (click === 'Seach') {
+      if (click === 'Search') {
         console.log(click)
         if (
-          prop.rooms >= rommsSeach &&
-          prop.meters >= MeterMinSeach &&
-          prop.meters <= MeterMaxSeach
+          prop.rooms >= rommsSearch &&
+          prop.meters >= MeterMinSearch &&
+          prop.meters <= MeterMaxSearch
         ) {
           /*************Se comienza a recopilar la información en las variables por cada ciclo del bucle************/
           dataLoad(
@@ -65,8 +69,8 @@ const setview = function (click, rommsSeach, MeterMinSeach, MeterMaxSeach) {
   }
 }
 /*************Se llama a la función setview para realizar la búsqueda desde el botón********************/
-buttonSeach.addEventListener('click', () => {
-  setview('Seach', rooms.value, metersMin.value, metersMax.value)
+buttonSearch.addEventListener('click', () => {
+  setview('Search', rooms.value, metersMin.value, metersMax.value)
 })
 /****Se llama a la función setview para realizar al momento de cargar la pagina con toda la data********/
-setview('noSeach')
+setview('noSearch')
